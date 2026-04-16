@@ -17,7 +17,7 @@ coordURL = 'http://api.openweathermap.org/geo/1.0/direct'
 weatherURL = 'http://api.openweathermap.org/data/2.5/forecast'
 
 # get the location coordindates via the Geocoding API
-def getCoord(query):
+def get_coord(query):
     try:
         response = requests.get(coordURL, params={"q": query, "appid": api_key, "units": "metric"})
         response.raise_for_status()
@@ -41,7 +41,7 @@ def getCoord(query):
         return coord, name
 
 # get the 5-day / 3-hour forecast via the Forecast 5-Day/3-Hour API
-def getWeather(lat,lon):
+def get_weather(lat,lon):
     try:
         response = requests.get(weatherURL, params={"lat": lat, "lon": lon, "appid": api_key, "units": "metric"})
         response.raise_for_status()
@@ -100,14 +100,14 @@ def forecast(weather):
 location = input("Get a 3-day weather forecast for ")
 
 # use location to query for the location's coordinates
-coord_result = getCoord(location)
+coord_result = get_coord(location)
 if coord_result is None:
     print("Could not retrieve coordinates. Exiting.")
     exit()
 coordinates, resolved_name = coord_result
 
 # use coordinates to query for raw weather data
-weather = getWeather(coordinates[0],coordinates[1])
+weather = get_weather(coordinates[0],coordinates[1])
 if weather is None:
     print("Could not retreive weather data. Exiting.")
     exit()
