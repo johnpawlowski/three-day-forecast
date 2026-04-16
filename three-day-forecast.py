@@ -13,13 +13,13 @@ load_dotenv()
 api_key = os.getenv("OPEN_WEATHER_API_KEY")
 
 # API endpoints
-coordURL = 'http://api.openweathermap.org/geo/1.0/direct'
-weatherURL = 'http://api.openweathermap.org/data/2.5/forecast'
+COORD_URL = 'http://api.openweathermap.org/geo/1.0/direct'
+WEATHER_URL = 'http://api.openweathermap.org/data/2.5/forecast'
 
 # get the location coordindates via the Geocoding API
 def get_coord(query):
     try:
-        response = requests.get(coordURL, params={"q": query, "appid": api_key, "units": "metric"})
+        response = requests.get(COORD_URL, params={"q": query, "appid": api_key, "units": "metric"})
         response.raise_for_status()
     except requests.exceptions.HTTPError as e:
         print(f"API error: {e}")
@@ -43,7 +43,7 @@ def get_coord(query):
 # get the 5-day / 3-hour forecast via the Forecast 5-Day/3-Hour API
 def get_weather(lat,lon):
     try:
-        response = requests.get(weatherURL, params={"lat": lat, "lon": lon, "appid": api_key, "units": "metric"})
+        response = requests.get(WEATHER_URL, params={"lat": lat, "lon": lon, "appid": api_key, "units": "metric"})
         response.raise_for_status()
     except requests.exceptions.HTTPError as e:
         print(f"API error: {e}")
