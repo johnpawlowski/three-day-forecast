@@ -1,6 +1,5 @@
 # import required packages
 import requests # type: ignore
-import pprint
 import os
 import json
 import csv
